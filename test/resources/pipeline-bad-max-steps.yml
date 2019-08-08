@@ -1,0 +1,370 @@
+version: "1.0"
+
+pipeline:
+  appOwner: POET
+  appName: sre-pipeline
+
+  appVersion:
+    master: "1.1"
+
+  steps:
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]
+    - name: test
+      image: gradle:5.0-jre8-alpine
+      commands: [ env ]

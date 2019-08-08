@@ -1,0 +1,16 @@
+version: "1.0"
+
+pipeline:
+  appOwner: POET
+  appName: sre-pipeline
+
+  appVersion:
+    master: 1.0.0
+
+  steps:
+    - name: test pipeline
+      image: gradle:5.3-jre8-alpine
+      commands:
+        - env
+        - gradle --no-daemon clean test jacocoTestReport
+

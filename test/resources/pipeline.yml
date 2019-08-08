@@ -1,0 +1,59 @@
+version: "1.0"
+pipeline:
+  appOwner: POET
+  appGroup: sre
+  appName: sre-pipeline
+  appAkmid: 1234
+
+
+  appVersion:
+    master: 2.4.2
+    feature/jdk_update: jdk_update.2.4.1
+
+  environment:
+    # user specific environment variables to pass to all steps
+    # also available in pipeline config
+    # none of these names are special or understood by the pipeline
+    # they can reference the standard environment variables (see below)
+    IMAGE_NAME: ${PIPELINE_APP_NAME}/${FULL_BRANCH_NAME_WITHOUT_FORWARD_SLASH}
+    BUILD_TAG: ${PIPELINE_APP_VERSION}.${PIPELINE_BUILD_NUMBER}
+    BUILD_CONTAINERS: docker-repo:8502/jenkins/build-container
+
+  steps:
+    - name: jar build
+      image: ${BUILD_CONTAINERS}/mvn-3.5.2-jdk8
+      commands:
+        - mvn -s .m2/settings.xml clean package
+
+    - name: docker image build
+      image: ${BUILD_CONTAINERS}/docker
+      commands:
+        - docker build -t ${IMAGE_NAME} .
+
+    - name: docker image test
+      image: ${BUILD_CONTAINERS}/docker-compose
+      commands:
+        - cd src/test/docker
+        - chmod +x run-tests.sh
+        - ENABLE_JENKINS_WORKAROUNDS=1 ./run-tests.sh ${IMAGE_NAME}
+
+    - name: docker image publish
+      image: ${BUILD_CONTAINERS}/docker
+      environment:
+        repo: ${IMAGE_NAME}
+        tags:
+          - latest
+          - ${BUILD_TAG}
+        registries:
+          - registry: docker-repo:8502
+            cred: registry_creds
+
+
+    - name: slack
+      image: ${BUILD_CONTAINERS}/slack
+      environment:
+        channel: dev_chat
+      when:
+        # by default steps will only execute while `PIPELINE_STATUS` is `success`, but we
+        # can override
+        status: [ success, failure ]

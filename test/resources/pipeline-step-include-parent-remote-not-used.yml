@@ -1,0 +1,7 @@
+resources:
+  repositories:
+    - name: templates-alt
+
+pipeline:
+  steps:
+    - include: step-missing-alt-repo@templates-alt

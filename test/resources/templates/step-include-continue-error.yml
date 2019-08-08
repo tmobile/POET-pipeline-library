@@ -1,0 +1,6 @@
+steps:
+  - name: template 1
+    image: ubuntu:14.04
+    commands:
+      - ls
+    continueOnError: true

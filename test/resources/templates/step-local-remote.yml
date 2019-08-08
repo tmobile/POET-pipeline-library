@@ -1,0 +1,7 @@
+resources:
+  repositories:
+    - name: templates-alt
+      uri: http://
+
+steps:
+  - include: step-alt-two.yml@templates-alt

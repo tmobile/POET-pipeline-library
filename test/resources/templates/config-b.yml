@@ -1,0 +1,12 @@
+pipeline:
+  appName: "hello"
+  appVersion:
+    master: 1.0.0
+    feature/b: 1.2.0
+    feature/c: 1.3.0
+  appOwner: poet
+  appAkmid: 1234
+  environment:
+    LOG_LEVEL: "debug"
+    GREETING: "Hello World"
+    B_ONLY: "ok"

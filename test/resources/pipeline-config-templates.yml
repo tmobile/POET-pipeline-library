@@ -1,0 +1,43 @@
+resources:
+  repositories:
+    - name: templates
+      uri: https://bitbucket.example.com/scm/PRJ/pipeline-templates.git
+      credentials:
+        id: srebuildmaster
+
+pipeline:
+  global:
+    appName: hello_world
+    appVersion:
+      master: 2.0.1
+  environment:
+    UBUNTU_VERSION: "14.04"
+    LOG_LEVEL: "warn"
+
+  include:
+    - config-version-only.yml@templates
+    - config-env-only.yml@templates
+    - config-b.yml@templates
+
+  steps:
+  - name: ${PIPELINE_APP_NAME} env
+    image: ubuntu:${UBUNTU_VERSION}
+    secrets:
+    - source: 9b2f
+      target:
+      - DOCKER_USERNAME
+      - DOCKER_PASSWORD
+    - source: abd
+      target:
+        - ANOTHER_SECRET
+    commands:
+    - env
+
+  - include: one.yml@templates
+    environment:
+      HELLO: world
+
+  - name: last step
+    image: mvn:3
+    commands:
+      - mvn test package publish

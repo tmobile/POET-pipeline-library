@@ -1,0 +1,15 @@
+pipeline:
+  global:
+    appName: hello
+    appVersion:
+      master: 2.0.1
+  environment:
+    UBUNTU_VERSION: "14.04"
+
+  include:
+    - config-b.yml@templates
+
+  steps:
+    - name: hello
+      image: ok
+      commands: [ ls ]

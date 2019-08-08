@@ -1,0 +1,19 @@
+steps:
+  - name: template 1
+    image: ubuntu:14.04
+    commands:
+      - ls
+    secrets:
+      - source: 9b2fXXX
+        target:
+          - DOCKER_USERNAME
+          - DOCKER_PASSWORD
+      - source: fff
+        target:
+          - HELLO
+  - name: template 2
+    image: ubuntu:14.04
+    commands:
+      - whoami
+    when:
+      status: [success, failure]

@@ -1,0 +1,3 @@
+pipeline:
+  steps:
+    - include: step-standard-include.yml@templates

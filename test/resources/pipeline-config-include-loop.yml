@@ -1,0 +1,8 @@
+pipeline:
+  appName: pipeline-test
+
+  environment:
+    LOG_LEVEL: warning
+
+  include:
+    - config-include-loop-a.yml@templates

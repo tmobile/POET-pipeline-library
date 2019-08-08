@@ -1,0 +1,28 @@
+resources:
+  repositories:
+    - name: templates
+      uri: https://bitbucket.example.com/scm/PRJ/pipeline-templates.git
+      credentials:
+        id: srebuildmaster
+
+pipeline:
+  global:
+    appName: hello
+    appVersion:
+      master: 2.0.1
+  environment:
+    UBUNTU_VERSION: "14.04"
+
+  steps:
+  - name: ${PIPELINE_APP_NAME} env
+    image: ubuntu:${UBUNTU_VERSION}
+    secrets:
+    - source: 9b2f
+      target:
+      - DOCKER_USERNAME
+      - DOCKER_PASSWORD
+    - source: abd
+      target:
+        - ANOTHER_SECRET
+    commands:
+    - env

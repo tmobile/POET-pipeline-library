@@ -1,0 +1,14 @@
+pipeline:
+  appName: "hello"
+  appVersion:
+    master: 1.0.0
+  appOwner: poet
+  appAkmid: 1234
+  environment:
+    LOG_LEVEL: "debug"
+    GREETING: "Hello World"
+    B_ONLY: "ok"
+  steps:
+    - name: hello
+      image: ok
+      commands: [ ls ]

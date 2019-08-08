@@ -1,0 +1,7 @@
+pipeline:
+  appOwner: poet
+  appGroup: something
+  environment:
+    LOG_LEVEL: "info"
+    GREETING: "hello world"
+    B_ONLY: "bee"

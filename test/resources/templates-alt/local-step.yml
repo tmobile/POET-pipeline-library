@@ -1,0 +1,5 @@
+steps:
+  - name: local step
+    image: image
+    commands: [ ls ]
+  - include: step-alt-two.yml

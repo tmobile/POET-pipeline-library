@@ -1,0 +1,2 @@
+steps:
+  - include: step-alt-two.yml@templates-alt2

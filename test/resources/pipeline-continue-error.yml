@@ -1,0 +1,33 @@
+pipeline:
+  global:
+    appName: jenkins-pipeline
+    appVersion:
+      master: 1.0.0
+
+  steps:
+    - name: test pipeline
+      image: gradle:5.0-jre8-alpine
+      commands:
+        - gradle --no-daemon clean test jacocoTestReport
+
+    - name: test pipeline
+      image: gradle:5.0-jre8-alpine
+      commands:
+        - gradle --no-daemon clean test jacocoTestReport
+      continueOnError: false
+
+    - name: test pipeline
+      image: gradle:5.0-jre8-alpine
+      continueOnError: true
+      commands:
+        - gradle --no-daemon clean test jacocoTestReport
+
+    - include: step-include-continue-error-false.yml@templates
+    - include: step-include-continue-error-false.yml@templates
+      continueOnError: false
+    - include: step-include-continue-error-false.yml@templates
+      continueOnError: true
+
+    - include: step-include-continue-error.yml@templates
+    - include: step-include-continue-error.yml@templates
+      continueOnError: false

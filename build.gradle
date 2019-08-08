@@ -1,0 +1,65 @@
+apply plugin: 'groovy'
+apply plugin: "jacoco"
+
+group = 'com.tmobile.sre.jenkins'
+
+repositories {
+  jcenter()
+}
+
+sourceSets {
+  main {
+    groovy {
+      srcDir 'src'
+    }
+    resources {
+      srcDir 'resources'
+    }
+  }
+  test {
+    groovy {
+      srcDir 'test'
+    }
+    resources {
+      srcDir 'test/resources'
+    }
+  }
+}
+
+configurations {
+  ivy
+}
+
+dependencies {
+  compile 'org.codehaus.groovy:groovy-all:2.5.4'
+  compile 'org.yaml:snakeyaml:1.23'
+  compile 'org.everit.json:org.everit.json.schema:1.5.1'
+  compile 'com.cloudbees:groovy-cps:1.22'
+
+  testCompile 'junit:junit:4.12'
+  ivy 'org.apache.ivy:ivy:2.3.0'
+}
+
+tasks.withType(GroovyCompile) {
+    groovyClasspath += configurations.ivy
+}
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
+}
+
+compileGroovy {
+  groovyOptions.configurationScript = file("config.groovy")
+}
+
+jacocoTestReport {
+    group = "Reporting"
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination file("${buildDir}/reports/coverage")
+    }
+}

@@ -1,0 +1,12 @@
+title: "SRE Pipeline Step Template Schema"
+description: "pipeline step include file"
+type: object
+required: [ steps ]
+additionalProperties: false
+
+properties:
+  resources:
+    "$ref": "pipeline-schema-defs#/definitions/resources"
+
+  steps:
+    "$ref": "pipeline-schema-defs#/definitions/steps"  
