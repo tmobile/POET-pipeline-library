@@ -1,0 +1,2 @@
+steps:
+  - include: step-loop-one.yml@templates

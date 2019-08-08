@@ -1,0 +1,16 @@
+pipeline:
+  global:
+    appName: jenkins-pipeline
+    appVersion:
+      master: 1.0.0
+
+  steps:
+    - name: test pipeline
+      image: gradle:5.0-jre8-alpine
+      timeoutInMinutes: 2
+      commands:
+        - env
+        - gradle --no-daemon clean test jacocoTestReport
+    - include: step-include-timeout.yml@templates
+    - include: step-include-timeout.yml@templates
+      timeoutInMinutes: 44

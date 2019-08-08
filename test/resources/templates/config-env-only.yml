@@ -1,0 +1,5 @@
+pipeline:
+  environment:
+    LOG_LEVEL: "info"
+    GREETING: "hello"
+    A_ONLY: "hi"

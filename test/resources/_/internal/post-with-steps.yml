@@ -1,0 +1,17 @@
+steps:
+  - name: PipelineNotifyInflux
+    image: docker.example.com:8502/sre-pipeline/step/notify/influx:notifyInflux-1.0.0-1
+    continueOnError: true
+    secrets:
+      - source: influxdb_k8s_npe
+        target:
+          - INFLUX_USER
+          - INFLUX_USER_PSWD
+    environment:
+      INFLUX_HOST: "influxdb.dev.example.com"
+      INFLUX_PORT: "8086"
+    commands:
+      - notifyInflux
+    when:
+      status: [ failure, success]
+

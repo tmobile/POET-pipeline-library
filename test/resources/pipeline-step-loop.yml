@@ -1,0 +1,13 @@
+resources:
+  repositories:
+    - name: templates
+      uri: https://bitbucket.example.com/scm/PRJ/pipeline-templates.git
+      credentials:
+        id: srebuildmaster
+
+pipeline:
+  global:
+    appName: hello
+
+  steps:
+    - include: step-loop-one.yml@templates

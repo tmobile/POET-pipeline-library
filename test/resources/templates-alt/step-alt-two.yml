@@ -1,0 +1,4 @@
+steps:
+  - name: step alt two
+    image: image
+    commands: [ ls ]

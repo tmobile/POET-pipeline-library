@@ -1,0 +1,11 @@
+resources:
+  repositories:
+    - name: templates-alt
+      uri: abcd
+
+pipeline:
+  appOwner: POET
+  appName: sre-pipeline
+
+  steps:
+    - include: step-alt-two.yml@templates-alt

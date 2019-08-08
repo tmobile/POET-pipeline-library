@@ -1,0 +1,5 @@
+pipeline:
+  appVersion:
+    master: 1.0.0
+    feature/a: 1.2.0
+    feature/c: 1.1.1

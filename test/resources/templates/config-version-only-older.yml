@@ -1,0 +1,7 @@
+# uses older 'global' heading
+pipeline:
+  global:
+    appVersion:
+      master: 1.0.0
+      feature/a: 1.2.0
+      feature/c: 1.1.1

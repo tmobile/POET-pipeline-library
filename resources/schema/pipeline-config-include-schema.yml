@@ -1,0 +1,40 @@
+title: "SRE Pipeline Configuration Template Schema"
+description: "pipeline configuration include file"
+type: object
+required: [ pipeline ]
+additionalProperties: false
+
+properties:
+  resources:
+    "$ref": "pipeline-schema-defs#/definitions/resources"
+
+  pipeline:
+    type: object
+    description: "Pipeline Definition"
+    additionalProperties: false
+    properties:
+      include:
+        "$ref": "pipeline-schema-defs#/definitions/configInclude"
+
+      environment:
+        "$ref": "pipeline-schema-defs#/definitions/environment"
+      
+      appVersion:
+        "$ref": "pipeline-schema-defs#/definitions/appVersion"
+
+      appOwner:
+        "$ref": "pipeline-schema-defs#/definitions/appOwner"
+
+      appGroup:
+        "$ref": "pipeline-schema-defs#/definitions/appGroup"      
+
+      appName:
+        "$ref": "pipeline-schema-defs#/definitions/appName"
+
+      appAkmid:
+        "$ref": "pipeline-schema-defs#/definitions/appAkmid"
+
+      global:
+        description: "deprecated, please move 'appName' and 'appVersion' under pipeline"
+        # this is deprecated, so not bothering to type out its member properties
+        type: object

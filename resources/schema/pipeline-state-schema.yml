@@ -1,0 +1,223 @@
+title: "POET Pipeline State Schema"
+description: "A synopsis of a pipeline run."
+type: object
+required: [ runId, status ]
+
+properties:
+
+  version:
+    description: "pipeline state schema file version"
+    type: string
+    default: "1.0"
+    enum: [ "1.0" ]
+
+  runId:
+    description: "the primary unique id for an instance of a pipeline run"
+    type: string
+    maxLength: 64
+
+  startTimestamp:
+    "$ref": "#/definitions/startTimestamp"
+
+  startTime:
+    "$ref": "#/definitions/startTime"
+
+  durationMillis:
+    "$ref": "#/definitions/durationMillis"
+
+  status:
+    "$ref": "#/definitions/status"
+
+  buildUrl:
+    description: "link to the pipeline engine job for this run"
+    type: string
+    maxLength: 2048
+
+  host:
+    description: "pipeline engine host server"
+    type: string
+    maxLength: 64
+
+  jobName:
+    description: "short name of the pipeline run job "
+    type: string
+    maxLength: 64
+
+  runNumber:
+    description: "the sequential run ordinal (often called 'build number')"
+    type: integer
+    minimum: 1
+
+  branch:
+    description: "the source branch in the source control system"
+    type: string
+    maxLength: 64
+
+  commitId:
+    description: "source control commit id for traceabilty"
+    type: string
+    maxLength: 64
+
+  commitMessage:
+    description: "source control commit message"
+    type: string
+    maxLength: 64
+
+  commitAuthor:
+    description: "source control committer"
+    type: string
+    maxLength: 64
+
+  appOwner:
+    "$ref": "#/definitions/appOwner"
+
+  appGroup:
+    "$ref": "#/definitions/appGroup"      
+
+  appName:
+    "$ref": "#/definitions/appName"
+
+  appVersion:
+    "$ref": "#/definitions/appVersion"
+
+  appAkmid:
+    "$ref": "#/definitions/appAkmid"
+
+  stepStates:
+    description: "pipeline steps"
+    type: array
+    maxItems: 64
+    items:
+      "$ref": "#/definitions/stepState"
+
+
+definitions:
+
+  stepState:
+    description: "a single pipeline step"
+    type: object
+    properties:
+      name:
+        title: "step name"
+        description: "user-defined step description"
+        type: string
+        maxLength: 64
+
+      image:
+        description: "docker image that implements this step"
+        type: string
+        maxLength: 512
+
+      include:
+        description: "include reference"
+        type: string
+        maxLength: 128
+
+      categories:
+        description: "list of category tags to classify the step"
+        type: array
+        items:
+          type: string
+          maxLength: 128
+
+      startTime:
+        "$ref": "#/definitions/startTime"
+
+      durationMillis:
+        "$ref": "#/definitions/durationMillis"
+
+      status:
+        "$ref": "#/definitions/status"
+
+      explanation:
+        description: "a note about step execution, typically a message about a FAILURE"
+        type: string
+        maxLength: 512
+
+      when:
+        description: "list of when clauses controlling this step's execution"
+        type: array
+        items:
+          type: string
+          maxLength: 2048
+
+      commands:
+        description: "list of commands to run inside image"
+        type: array
+        items:
+          "$ref": "#/definitions/command"
+          maxLength: 2048
+        minItems: 1
+
+
+  command:
+    description: "a single command inside a step"
+    type: object
+    properties:
+      line:
+        description: "command line"
+        type: string
+        maxLength: 2048
+
+      startTime:
+        "$ref": "#/definitions/startTime"
+
+      durationMillis:
+        "$ref": "#/definitions/durationMillis"
+
+
+  startTimestamp:
+    description: "start time in ISO 8601 format"
+    type: string
+    format: date-time
+
+  startTime:
+    description: "start time in milliseconds since epoch"
+    type: integer
+
+  durationMillis:
+    description: "duration of pipeline run in milliseconds"
+    type: integer
+
+  status:
+    description: "flag that describes process disposition"
+    type: string
+    enum: 
+      - "SUCCESS"
+      - "FAILURE"
+      - "SKIP"
+
+
+  appOwner:
+    description: "application owner"
+    type: string
+    maxLength: 64
+
+  appGroup:
+    description: "application group"
+    type: string
+    maxLength: 64
+
+  appName:
+    description: "application name (provided as PIPELINE_APP_NAME)"
+    type: string
+    maxLength: 64
+
+  appAkmid:
+    description: "application AKMID"
+    type: integer
+
+  appVersion:
+    description: "mapping of branch name to PIPELINE_APP_VERSION"
+    type: object
+    required: [ master ]
+    properties:
+      master:
+        type: string
+        maxLength: 64
+      additionalProperties:
+        type: string
+        maxLength: 64
+
+
+

@@ -1,0 +1,5 @@
+steps:
+  - name: step two
+    image: ubuntu:14.04
+    commands:
+      - ls

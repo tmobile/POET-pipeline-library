@@ -1,0 +1,13 @@
+pipeline:
+  appName: pipeline-test
+
+  environment:
+    LOG_LEVEL: warning
+
+  include:
+    - config-include-a.yml@templates
+
+  steps:
+    - name: hello
+      image: ok
+      commands: [ ls ]

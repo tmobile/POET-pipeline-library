@@ -1,0 +1,8 @@
+pipeline:
+  include:
+    - config-version-only-older.yml@templates
+    - config-env-only.yml@templates
+    - config-b-older.yml@templates
+
+  steps:
+  - include: one.yml@templates

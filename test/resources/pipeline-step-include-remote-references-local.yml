@@ -1,0 +1,8 @@
+resources:
+  repositories:
+    - name: templates-alt
+      uri: http://
+
+pipeline:
+  steps:
+    - include: step-references-local.yml@templates-alt

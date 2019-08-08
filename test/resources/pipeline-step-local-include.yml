@@ -1,0 +1,7 @@
+pipeline:
+  steps:
+    - include: local-templates/step-one.yml
+      environment:
+        HELLO: world
+      when:
+        branch: master

@@ -1,0 +1,4 @@
+steps:
+  - name: hello
+    image: ok
+    commands: []

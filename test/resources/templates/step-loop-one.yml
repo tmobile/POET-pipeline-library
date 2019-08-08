@@ -1,0 +1,2 @@
+steps:
+  - include: step-loop-two.yml@templates

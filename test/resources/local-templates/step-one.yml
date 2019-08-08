@@ -1,0 +1,6 @@
+steps:
+  - name: step one
+    image: ubuntu:14.04
+    commands:
+      - ls
+  - include: local-templates/step-two.yml

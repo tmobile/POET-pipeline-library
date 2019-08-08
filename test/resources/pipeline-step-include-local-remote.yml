@@ -1,0 +1,8 @@
+
+pipeline:
+  steps:
+    - include: step-local-remote.yml@templates
+      environment:
+        HELLO: world
+      when:
+        branch: master

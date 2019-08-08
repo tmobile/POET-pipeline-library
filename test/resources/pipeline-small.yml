@@ -1,0 +1,11 @@
+pipeline:
+  global:
+    appName: jenkins-pipeline
+    appVersion:
+      master: 1.0.0
+
+  steps:
+  - name: test
+    image: gradle:4.10-jre8-alpine
+    commands:
+    - gradle --no-daemon clean test jacocoTestReport

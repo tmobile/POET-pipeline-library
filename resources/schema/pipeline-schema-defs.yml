@@ -1,0 +1,250 @@
+$id: pipeline-schema-defs
+
+definitions:
+  appOwner:
+    description: "application owner"
+    type: string
+    maxLength: 64
+
+  appGroup:
+    description: "application group"
+    type: string
+    maxLength: 64
+
+  appName:
+    description: "application name (provided as PIPELINE_APP_NAME)"
+    type: string
+    maxLength: 64
+
+  appAkmid:
+    description: "application AKMID"
+    type: integer
+
+  configInclude:
+    description: "include pipeline configuration"
+    type: array
+    maxItems: 32
+    items:
+      type: string
+
+  resources:
+    type: object
+    properties:
+      repositories:
+        description: "Repository resource for external templates"
+        type: array
+        maxItems: 32
+        items:
+          type: object
+          required: [ name, uri ]
+          properties:
+            name:
+              type: string
+              maxLength: 64
+            uri:
+              type: string
+              maxLength: 256
+            credentials:
+              type: object
+              required: [ id ]
+              properties:
+                id:
+                  type: string
+                  maxLength: 64
+
+  environment:
+    description: "Global pipeline environment variables"
+    type: object
+    additionalProperties:
+      type: string
+      maxLength: 128
+
+  appVersion:
+    description: "mapping of branch name to PIPELINE_APP_VERSION"
+    type: object
+    required: [ master ]
+    properties:
+      master:
+        type: string
+        maxLength: 64
+      additionalProperties:
+        type: string
+        maxLength: 64
+
+  steps:
+    description: "pipeline steps/stages"
+    type: array
+    maxItems: 64
+    items:
+      anyOf:
+        - "$ref": "#/definitions/step"
+        - "$ref": "#/definitions/stepInclude"
+
+  step:
+    description: "a single step"
+    type: object
+    required: [ name, image ]
+    additionalProperties: false
+    properties:
+      name:
+        title: "step name"
+        description: "user-defined step description"
+        type: string
+        maxLength: 64
+      image:
+        description: "docker image"
+        type: string
+        maxLength: 512
+      commands:
+        description: "list of commands to run inside image"
+        type: array
+        items:
+          type: string
+          maxLength: 2048
+        minItems: 1
+      timeoutInMinutes:
+        "$ref": "#/definitions/timeoutInMinutes"
+      continueOnError:
+        "$ref": "#/definitions/continueOnError"
+      environment:
+        # no restriction on values here, since we're allowing lists/maps that get
+        # serialized to JSON
+        description: "addititional environment variables for step"
+        type: object
+      settings: # backwards compat
+        description: "deprecated, please use environment"
+        type: object
+      secrets:
+        "$ref": "#/definitions/secrets"
+      when:
+        "$ref": "#/definitions/when"
+
+  stepInclude:
+    description: "include one or more steps"
+    type: object
+    required: [ include ]
+    additionalProperties: false
+
+    properties:
+      include:
+        description: "include reference"
+        type: string
+        maxLength: 128
+      timeoutInMinutes:
+        "$ref": "#/definitions/timeoutInMinutes"
+      continueOnError:
+        "$ref": "#/definitions/continueOnError"
+      environment:
+        # no restriction on values here, since we're allowing lists/maps that get
+        # serialized to JSON
+        description: "Addititional environment variables for step"
+        type: object
+      secrets:
+        "$ref": "#/definitions/secrets"
+      when:
+        "$ref": "#/definitions/when"
+  when:
+    type: object
+    title: "Step Conditions"
+    description: "Conditions to run step"
+    additionalProperties: false
+    properties:
+      status:
+        type: array
+        maxItems: 16
+        title: "Pipeline Status Condition"
+        description: "Restrict based on pipeline status (success, failure)"
+        items:
+          anyOf:
+            - type: string
+              maxLength: 16
+            - type: array
+              maxItems: 16
+              items:
+                type: string
+                maxLength: 16
+      # we allow branch to be specified in a couple different ways (see docs), hence the funky anyOf
+      branch:
+        title: "Branch Condition"
+        description: "Restrict based on branch"
+        anyOf:
+          - type: string
+            maxLength: 128
+          - type: array
+            maxItems: 16
+            items:
+              type: string
+              maxLength: 128
+          - "$ref": "#/definitions/includeExclude"
+
+      environment:
+        title: "Environment Condition"
+        description: "Restrict based on environment variable"
+        additionalProperties:
+          anyOf:
+            - type: string
+              maxLength: 128
+            - type: array
+              maxItems: 16
+              items:
+                types: string
+                maxLength: 128
+            - "$ref": "#/definitions/includeExclude"
+
+  includeExclude:
+    type: object
+    properties:
+      include:
+        anyOf:
+          - type: string
+            maxLength: 128
+          - type: array
+            maxItems: 16
+            items:
+              type: string
+              maxLength: 128
+      exclude:
+        anyOf:
+          - type: string
+            maxLength: 128
+          - type: array
+            maxItems: 16
+            items:
+              type: string
+              maxLength: 128
+
+  secrets:
+    description: "secrets to pass to step as environment variable(s)"
+    type: array
+    maxItems: 32
+    items:
+      # This reflects our existing jenkins only secret support
+      # and will likely change
+
+      secret:
+        description: "Secret Configuration"
+        type: object
+        required: [ source, target ]
+        additionalProperties: false
+
+        properties:
+          source:
+            description: "Jenkins secret ID"
+            type: string
+          target:
+            description: "Env variables to provide secrets"
+            type: array
+            items:
+              type: string
+            minItems: 1
+            maxItems: 2
+
+  timeoutInMinutes:
+    description: "number of minutes before step times out"
+    type: integer
+    minimum: 1
+    maximum: 360
+
+  continueOnError:
+    description: "step success is optional"
+    type: boolean

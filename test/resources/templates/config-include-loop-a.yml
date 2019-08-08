@@ -1,0 +1,14 @@
+pipeline:
+  appGroup: pipeline
+
+  include:
+    - config-include-b.yml
+    - config-include-loop-b.yml
+
+  appVersion:
+    master: 1.0.0
+
+  environment:
+    LOG_LEVEL: "info"
+    GREETING: "hello"
+    A_ONLY: "hi"

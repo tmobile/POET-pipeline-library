@@ -1,0 +1,5 @@
+steps:
+  - name: PipelinePreStep
+    image: ubuntu:14.04
+    commands:
+      - ls
