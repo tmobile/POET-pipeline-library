@@ -17,13 +17,13 @@ The Poet Pipeline brings modern, container based CI/CD to Jenkins.
 # pipeline.yml
 pipeline:
   appOwner: POET
-  appName: sre-pipeline
+  appName: poet-pipeline
 
   appVersion:
     master: 1.0.0
 
   steps:
-    - name: test pipeline
+    - name: test-pipeline
       image: gradle:5.3-jre8-alpine
       commands:
         - gradle clean test jacocoTestReport
