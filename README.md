@@ -1,6 +1,6 @@
 # Poet Pipeline
 
-![pipeline logo](https://raw.githubusercontent.com/wiki/tmobile/POET-pipeline-library/images/POET_logo_final-480.png?token=AAAEJEG3KEN4GOTRXBBE2XS5K3KZU)
+![pipeline logo](https://github.com/tmobile/POET-pipeline-library/wiki/images/POET_logo_final-480.png)
 
 The Poet Pipeline brings modern, container based CI/CD to Jenkins.
 
