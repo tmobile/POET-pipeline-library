@@ -1,0 +1,7 @@
+version: "2.3"
+services:
+  pipeline-agent-dind:
+    image: "${DOCKER_ARTIFACTORY}/${DOCKER_NAMESPACE}/${DOCKER_IMAGE}:${VERSION}"
+    build:
+      context: .
+      dockerfile: ./Dockerfile

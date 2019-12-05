@@ -1,0 +1,8 @@
+---
+CaC:
+  files:
+  - pipeline-CaC.yml
+JCasC:
+  files:
+  - pipeline-JCasC.yml
+  - pipeline-K8SCloudAgentsJCasC.yml

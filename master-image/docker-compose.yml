@@ -1,0 +1,12 @@
+version: "2.3"
+services:
+  pipeline-master-jcasc:
+    image: "${DOCKER_ARTIFACTORY}/${DOCKER_NAMESPACE}/${DOCKER_IMAGE}:${VERSION}"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8081:8080
+    env_file:
+      - application.env
+      #- secrets.env

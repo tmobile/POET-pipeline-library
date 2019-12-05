@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+{% if configfiles %}
+   {% for item in configfiles %}
+cat > {{item.path}} <<'EOF'
+{{item.content}}
+EOF
+   {% endfor %}
+{% endif %}

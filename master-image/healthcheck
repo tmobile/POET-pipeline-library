@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+HC="${STARTUP_DIR:-/startup}/healthcheck.sh"
+[[ -x "${HC}" ]] &&  exec "${HC}"

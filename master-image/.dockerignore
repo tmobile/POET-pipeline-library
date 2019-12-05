@@ -1,0 +1,4 @@
+**
+!./lib/*
+!./healthcheck
+!./startup.sh

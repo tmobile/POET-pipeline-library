@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Set Environment Variables
+function setEnvVars() {
+  log.info "Setting Environment Variables"
+  {% if env %}
+     {% for item in env %}
+        {% for key, value in item.items() %}
+           export "{{key}}"="{{value}}"
+        {% endfor %}
+     {% endfor %}
+  {% endif %}
+}
+
+# Set Secrets
+function setSecrets() {
+  log.info "Setting Secret Environment Variables"
+  {% if secrets %}
+     {% for item in secrets %}
+        {% for key, value in item.items() %}
+           export "{{key}}"="{{value}}"
+        {% endfor %}
+     {% endfor %}
+  {% endif %}
+}
+
+# Set Java Options
+function setJavaOpts() {
+  log.info "Setting Java Options"
+  {% if java_opts -%}
+     JAVA_OPTS="${JAVA_OPTS:-} {{java_opts}}"
+     export JAVA_OPTS=${JAVA_OPTS}
+  {% endif %}
+}
+
+setEnvVars || die "Unable to Set Environment Variables"
+setSecrets || die "Unable to Set Secrets"
+setJavaOpts || die "Unable to set Java Options"
+

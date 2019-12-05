@@ -1,0 +1,37 @@
+jenkins:
+  agentProtocols:
+  - JNLP4-connect
+  - Ping
+  disableRememberMe: false
+  globalNodeProperties:
+  - envVars:
+      env:
+      - key: PIPELINE_INTERNAL_TEMPLATES
+        value: |-
+          {"uri":"{{PIPELINE_INTERNAL_TEMPLATES_REPO}}","label":"master","credentials":{ "id":"{{PIPELINE_INTERNAL_TEMPLATES_JENKINS_CREDENTIAL_ID}}" }}
+  mode: NORMAL
+  numExecutors: 1
+  labelString: master
+  primaryView:
+    all:
+      name: all
+  quietPeriod: 5
+  scmCheckoutRetryCount: 0
+  slaveAgentPort: |-
+    {{AGENT_PORT}}
+  views:
+  - all:
+      name: all
+unclassified:
+  globalLibraries:
+    libraries:
+    - name: "poet-pipeline"
+      retriever:
+        modernSCM:
+          scm:
+            git:
+              id: "poet-pipeline"
+              remote: "{{PIPELINE_GLOBAL_LIBRARY_URL}}"
+  location:
+    adminAddress: "{{JENKINS_ADMIN_ADDRESS}}"
+    url: "{{JENKINS_URL}}"

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#
+# healthcheck.sh -
+#
+# Force exit on failures
+set -eo pipefail
+
+# Endpoint to hit
+health_url="http{% if ('true' == enableSSL) %}s{% endif %}://localhost:{% if ('true' == enableSSL) %}${SERVER_PORT:-8443}{% else %}${SERVER_PORT:-8080}{% endif %}${HEALTH_URI:-/}"
+
+# Retrieve and parse status from health endpoint
+status=''
+if [[ ! -z "${USER_AGENT:-}" ]]; then
+  status="$(eval curl --insecure --connect-timeout 2 -Is --fail -o /dev/null -w "%{http_code}" ${health_url} -A \"${USER_AGENT}\")"
+else
+  status="$(eval curl --insecure --connect-timeout 2 -Is --fail -o /dev/null -w "%{http_code}" ${health_url})"
+fi
+
+[[ "${status}" == *${HEALTH_STATUS_CODE}* ]] || exit 1

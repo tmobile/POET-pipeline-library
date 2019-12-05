@@ -1,0 +1,37 @@
+jenkins:
+  clouds:
+  - kubernetes:
+      addMasterProxyEnvVars: true
+      containerCapStr: '{{AGENT_EXECUTORS}}'
+      jenkinsTunnel: "{{PIPELINE_ENGINE_NAME}}-service:{{AGENT_PORT}}"
+      jenkinsUrl: "http://{{PIPELINE_ENGINE_NAME}}-service"
+      maxRequestsPerHostStr: '100'
+      name: "{{PIPELINE_ENGINE_NAME}}-agent"
+      namespace: "{{KUBERNETES_NAMESPACE}}"
+      serverUrl: "{{KUBERNETES_APISERVER_URL}}"
+      skipTlsVerify: true
+      templates:
+      - containers:
+        - image: "{{AGENT_DOCKER_IMAGE}}"
+          livenessProbe:
+            failureThreshold: 0
+            initialDelaySeconds: 0
+            periodSeconds: 0
+            successThreshold: 0
+            timeoutSeconds: 0
+          name: jnlp
+          alwaysPullImage: true
+          privileged: true
+          resourceLimitCpu: "{{AGENT_CPU}}m"
+          resourceLimitMemory: "{{AGENT_MEMORY}}Mi"
+          resourceRequestCpu: "{{AGENT_CPU}}m"
+          resourceRequestMemory: "{{AGENT_MEMORY}}Mi"
+          ttyEnabled: true
+        label: Linux
+        name: "{{PIPELINE_ENGINE_NAME}}-agent"
+        namespace: "{{KUBERNETES_NAMESPACE}}"
+        nodeUsageMode: EXCLUSIVE
+        podRetention: never
+        workspaceVolume:
+          emptyDirWorkspaceVolume:
+            memory: false

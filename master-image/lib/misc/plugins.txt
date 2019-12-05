@@ -1,0 +1,8 @@
+cloudbees-folder:6.9
+configuration-as-code:1.31
+credentials-binding:1.20
+git:3.12.1
+job-dsl:1.76
+kubernetes:1.19.3
+matrix-auth:2.4.2
+workflow-aggregator:2.6

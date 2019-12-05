@@ -1,0 +1,23 @@
+configfiles:
+- name: .gitignore
+  path: /startup/.gitignore
+  content: |
+    /*
+    !.gitignore
+    !*.key*
+    !jobs/
+    !secrets/
+    secrets/*
+    !secrets/*key*
+    !secrets/*Secret*
+    !secrets/*KEY*
+    !users/
+enableSSL: false
+java_opts: -server -d64 -XX:+PrintFlagsFinal -XshowSettings:vm -verbose:gc -XX:+AlwaysPreTouch -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$JENKINS_HOME/java_%p.hprof
+  -XX:+ParallelRefProcEnabled -XX:+UseStringDeduplication -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMPercentage=87.50 -XX:ActiveProcessorCount=2
+  -XX:+UseG1GC -XX:+PrintGC -XX:+PrintGCDateStamps -XX:+PrintGCDetails -XX:+PrintHeapAtGC -XX:+PrintGCCause -XX:+PrintTenuringDistribution -XX:+PrintReferenceGC -XX:+PrintAdaptiveSizePolicy
+  -Xloggc:$JENKINS_HOME/gc-%t.log -XX:NumberOfGCLogFiles=2 -XX:+UseGCLogFileRotation -XX:GCLogFileSize=100m -XX:+DisableExplicitGC -XX:ParallelGCThreads=10 -XX:ConcGCThreads=3
+  -XX:+UnlockDiagnosticVMOptions -XX:G1NewSizePercent=25 -XX:G1MaxNewSizePercent=30 -XX:InitiatingHeapOccupancyPercent=40 -XX:G1SummarizeRSetStatsPeriod=1 -XX:ErrorFile=$JENKINS_HOME/hs_err_%p.log -XX:+LogVMOutput -XX:LogFile=$JENKINS_HOME/jvm_%p.log
+  -Dhudson.slaves.ChannelPinger.pingIntervalSeconds=-1 -Dhudson.slaves.NodeProvisioner.initialDelay=0 -Dhudson.slaves.NodeProvisioner.MARGIN=50 -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85
+  -Djenkins.model.Jenkins.logStartupPerformance=true -Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dhudson.security.ExtendedReadPermission=true -Dgroovy.use.classvalue=true
+  -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400 -DhttpKeepAliveTimeout=60000 -DhttpsKeepAliveTimeout=60000 -Xbootclasspath/p:/startup/alpn-boot-8.1.12.v20180117.jar
