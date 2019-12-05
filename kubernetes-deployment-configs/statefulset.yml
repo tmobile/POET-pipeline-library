@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{PIPELINE_ENGINE_NAME}}-statefulset
+  namespace: {{KUBERNETES_NAMESPACE}}
+  labels:
+    k8s-app: {{PIPELINE_ENGINE_NAME}}
+spec:
+  selector:
+    matchLabels:
+      k8s-app: {{PIPELINE_ENGINE_NAME}}
+  serviceName: {{PIPELINE_ENGINE_NAME}}-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        k8s-app: {{PIPELINE_ENGINE_NAME}}
+    spec:
+      serviceAccountName: {{KUBERNETES_SERVICE_ACCOUNT_NAME}}
+      containers:
+      - name: {{PIPELINE_ENGINE_NAME}}-master
+        envFrom:
+        - configMapRef:
+            name: {{PIPELINE_ENGINE_NAME}}-configmap
+        env:
+        - name: JAVA_OPTS
+          value: " -Dhudson.DNSMultiCast.disabled=true "
+        - name: CASC_JENKINS_CONFIG_REPO_PASSWORD 
+          valueFrom:
+            secretKeyRef:
+              name: pipeline-secrets
+              key: CASC_JENKINS_CONFIG_REPO_PASSWORD
+        - name: PIPELINE_ENGINE_BACKUP_REPO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pipeline-secrets
+              key: PIPELINE_ENGINE_BACKUP_REPO_PASSWORD
+        image: {{MASTER_DOCKER_IMAGE}}
+        imagePullPolicy: Always
+        ports:
+        - name: master
+          containerPort: 8080
+          protocol: TCP
+        - name: agent
+          containerPort: 50000
+          protocol: TCP
+        livenessProbe:
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 3
+          successThreshold: 1
+          failureThreshold: 3
+          httpGet:
+            path: /login
+            scheme: HTTP
+            port: master
+        readinessProbe:
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 3
+          successThreshold: 1
+          failureThreshold: 3
+          httpGet:
+            path: /login
+            scheme: HTTP
+            port: master
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 8192Mi
+          requests:
+            cpu: 2000m
+            memory: 8192Mi
+        terminationMessagePolicy: File
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+  updateStrategy:
+    type: RollingUpdate

@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{PIPELINE_ENGINE_NAME}}-ingress
+  namespace: {{KUBERNETES_NAMESPACE}}
+  annotations:
+    ingress.kubernetes.io/use-port-in-redirects: 'true'
+    ingress.kubernetes.io/ssl-redirect: 'false'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: 5m
+    nginx.ingress.kubernetes.io/proxy-read-timeout: 5m
+    kubernetes.io/ingress.class: std-ingress-class
+spec:
+  tls:
+    - hosts:
+        - {{PIPELINE_INGRESS_URL}}
+  rules:
+    - host: {{PIPELINE_INGRESS_URL}}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{PIPELINE_ENGINE_NAME}}-service
+              servicePort: master
